@@ -32,3 +32,6 @@
 
 # Composer PHAR
 /composer.phar
+
+app/bootstrap.php.cache
+app/bootstrap.php.cache
