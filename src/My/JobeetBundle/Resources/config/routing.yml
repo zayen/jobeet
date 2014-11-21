@@ -1,4 +1,6 @@
-my_jobeet_ens_job:
+my_jobeet_job:
     resource: "@MyJobeetBundle/Resources/config/routing/job.yml"
     prefix:   /job
+
+
 
