@@ -20,7 +20,10 @@
         "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
-        "knplabs/knp-paginator-bundle": "~2.4"
+        "knplabs/knp-paginator-bundle": "~2.4",
+        "leafo/lessphp": "*",
+        "components/jquery": "dev-master",
+        "twitter/bootstrap": "*"
     },
     "scripts": {
         "post-install-cmd": [

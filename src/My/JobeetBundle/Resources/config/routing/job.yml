@@ -1,9 +1,6 @@
 job:
-    path:     /{categorie}
-    defaults: { _controller: "MyJobeetBundle:Job:index",categorie: null  }
+    path:     /{category}
+    defaults: { _controller: "MyJobeetBundle:Job:index",category: null  }
 job_show:
     path:     /{id}/show
     defaults: { _controller: "MyJobeetBundle:Job:show" }
-cat_show:
-    path:     /{id}
-    defaults: { _controller: "MyJobeetBundle:Job:liste" }

@@ -23,15 +23,15 @@ class JobController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-
         $categories = $em->getRepository('MyJobeetBundle:Category')->getAvecJobs();
 
-        if ($category) {
+        if ($category !=null) {
 
             $jobs = $em->getRepository('MyJobeetBundle:Job')->getActiveJobs($category);
-        } else {
-            $jobs = $em->getRepository('MyJobeetBundle:Job')->getActiveJobs();
         }
+        else
+        {$jobs = $em->getRepository('MyJobeetBundle:Job')->getActiveJobs();}
+
 
         return $this->render('MyJobeetBundle:Job:index.html.twig', array(
             'categories' => $categories,

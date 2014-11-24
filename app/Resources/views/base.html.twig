@@ -1,14 +1,29 @@
-<!DOCTYPE html>
+<!DOCTYPE html-->
 <html>
 <head>
-    <meta charset="UTF-8"/>
-    <title>{% block title %}Welcome!{% endblock %}</title>
-    {% block stylesheets %}{% endblock %}
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript">
-    </script>
+    <title>{% block title %}Bootstrap 101 Template{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+        .bs-example{
+            margin: 20px;
+        }
+    </style>
+    {% block stylesheets %}
+        {% stylesheets '@bootstrap_less' combine=true %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
+        {% endstylesheets %}
+    {% endblock %}
+    <script src="../../assets/js/html5shiv.js"></script>
+    <script src="../../assets/js/respond.min.js"></script>
 </head>
 <body>
-{% block body %}{% endblock %}
-{% block javascripts %}{% endblock %}
+{% block body %}
+{% endblock %}
+
+{% block javascripts %}
+    {% javascripts '@jquery_js' '@bootstrap_js' filter='?yui_js' combine=true %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
 </body>
 </html>

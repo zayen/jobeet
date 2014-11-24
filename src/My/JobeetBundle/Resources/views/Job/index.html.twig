@@ -1,36 +1,53 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <a href="{{ path('job') }}">
-        Back to the list
-    </a>
+    <p class="text-left">
+        <a href="{{ path('job') }}">
+            Back to the list
+        </a>
     <div id="categ">
         {% for category in categories %}
-            <div>
-                <div class="category">
-                    <a href="{{ path('cat_show', { 'id': category.id }) }}">
-                        <h1>{{ category.name }}</h1>
+
+            <div class="container">
+                <ul class="nav nav-tabs">
+                    <a href="{{ path('job', { 'category': category.id}) }}">
+                        <li> {{ category.name }}</li>
                     </a>
-                </div>
+                </ul>
             </div>
+
         {% endfor %}
     </div>
+    </p>
 
     <div id="jobs">
-        {% for job in jobs %}
-            <div>
-                <div class="job">
-                    <a href="{{ path('job_show', { 'id': job.id }) }}">
-                        <h1>{{ job.url }}</h1>
-                    </a>
-                    {{ job.location }}
-                    {{ job.position }}
-                    {{ job.description }}
-
-                </div>
-
-
+        <div class="container">
+            <div class="bs-example">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>URL</th>
+                        <th>Location</th>
+                        <th>position</th>
+                    </tr>
+                    </thead>
+                    {% for job in jobs %}
+                    <tbody>
+                    <tr>
+                        <td>
+                            <a href="{{ path('job_show', { 'id': job.id }) }}">
+                                {{ job.url }}
+                            </a>
+                        </td>
+                        <td> {{ job.location }} </td>
+                        <td> {{ job.position }} </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
+        </div>
+
         {% endfor %}
+
     </div>
 {% endblock %}
