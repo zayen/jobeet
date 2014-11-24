@@ -1,16 +1,15 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <div>
-       <form>
-          <input type="text" value="entrer un mot clé" name="motcle">
-          <input type="button" value="submit">
-       </form>
-
+    <form id="form_recherche" action="{{ path('job_recherche') }}" method="post">
+        {{ form_widget(form) }}
+        <input type="submit" value="Rechercher" />
+    </form>
+    <div class="loading"></div>
+    <div id="resultats_recherche">
+        {% include 'MyJobeetBundle:Job:liste.html.twig' with {'jobs' : jobs} %}
     </div>
-
-
-        <div id="jobs">
+        <div id="jo">
             {% for category in categories %}
                 <div>
                     <div class="category">
@@ -30,5 +29,24 @@
             {% endfor %}
         </div>
 
+    <script>
+    $(".loading").hide();
+    $("#form_recherche").submit(function(){
+        $(".loading").show();
+        var motcle = $("#jobrecherche_motcle").val();
+        var DATA = 'motcle=' + motcle;
+        $.ajax({
+            type: "POST",
+            url: "{{ path('job_recherche')}}",
+            data: DATA,
+            cache: false,
+            success: function(data){
+                $('#resultats_recherche').html(data);
+                $(".loading").hide();
+            }
+        });
+        return false;
+    });
+    </script>
 
 {% endblock %}

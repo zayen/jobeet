@@ -41,4 +41,19 @@ class JobRepository extends EntityRepository
 
         return $query->getResult();
     }
+
+
+    public function getMotCleJobs($motcle)
+    {
+        $qb = $this->createQueryBuilder('j')
+            ->where("j.description LIKE :motcle OR j.location LIKE :motcle")
+            ->setParameter('motcle','%'.$motcle.'%')
+            ->orderBy('j.location', 'DESC');
+
+
+
+        $query = $qb->getQuery();
+
+        return $query->getResult();
+    }
 }

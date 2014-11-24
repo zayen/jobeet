@@ -9,3 +9,5 @@ job_show:
 job_recherche:
     path:     /recherche
     defaults: { _controller: "MyJobeetBundle:Job:recherche" }
+    requirements:
+      _method: POST
