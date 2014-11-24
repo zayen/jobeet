@@ -1,0 +1,18 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+
+
+        <div id="jobs">
+            {% for job in jobs %}
+                <div>
+                    <div class="job">
+                        <h1>{{ job.location }}</h1>
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
+
+
+{% endblock %}
