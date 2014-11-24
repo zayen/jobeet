@@ -1,6 +1,6 @@
 My\JobeetBundle\Entity\Job:
   type: entity
-  repositoryClass: My\JobeetBundle\Entity\JobRepository
+  repositoryClass: My\JobeetBundle\Repository\JobRepository
   table: job
   id:
     id:

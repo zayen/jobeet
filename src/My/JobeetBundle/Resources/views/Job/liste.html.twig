@@ -1,13 +1,19 @@
 {% extends '::base.html.twig' %}
 {% block body -%}
-        <div id="j">
-            {% for job in jobs %}
-                <div>
-                    <div class="job">
-                        <h1>{{ job.location }}</h1>
-                    </div>
+<div id="jobs">
+    {% for category in categories %}
+    <div>
+           <table>
+            {% for entity in category.tabjobs %}
+                <a href="{{ path('job_show', { 'id': entity.id }) }}">
+                    {{ entity.location }}
+                </a>
+                {{ entity.position }}
+                <td class="company">{{ entity.company }}</td>
 
-                </div>
             {% endfor %}
-        </div>
+        </table>
+    </div>
+    {% endfor %}
+
 {% endblock %}

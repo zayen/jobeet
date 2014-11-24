@@ -1,6 +1,6 @@
 <?php
 
-namespace My\JobeetBundle\Entity;
+namespace My\JobeetBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 

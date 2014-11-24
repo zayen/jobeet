@@ -19,26 +19,20 @@ class JobController extends Controller
      * Lists all Job entities.
      *
      */
-    public function indexAction()
+    public function indexAction($categorie = null)
     {
-        $form = $this->createForm(new JobRechercheForm());
-
-        $em = $this->getDoctrine()->getManager();
+          $em = $this->getDoctrine()->getManager();
 
         //retour les categorie qui ont liées avec un offre ou plus
 
-        $categories = $em->getRepository('MyJobeetBundle:Category')->getAvecJobs();
+       $categories = $em->getRepository('MyJobeetBundle:Category')->getAvecJobs();
 
-        foreach ($categories as $category) {
-            $category->setTabJobs(
-                $em->getRepository('MyJobeetBundle:Job')->getActiveJobs($category->getId())
-            );
-        }
+       $jobs =  $em->getRepository('MyJobeetBundle:Job')->getActiveJobs();
 
         return $this->render('MyJobeetBundle:Job:index.html.twig', array(
             'categories' => $categories,
-            'form' => $form->createView()
-        ));
+            'jobs'=>$jobs
+                    ));
     }
 
     /**
@@ -84,8 +78,6 @@ class JobController extends Controller
         {
             return $this->indexAction();
         }
-
-
 
     }
 }

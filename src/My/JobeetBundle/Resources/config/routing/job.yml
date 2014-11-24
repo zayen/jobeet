@@ -1,13 +1,9 @@
 job:
     path:     /
     defaults: { _controller: "MyJobeetBundle:Job:index" }
-
 job_show:
     path:     /{id}/show
     defaults: { _controller: "MyJobeetBundle:Job:show" }
-
-job_recherche:
-    path:     /recherche
-    defaults: { _controller: "MyJobeetBundle:Job:recherche" }
-    requirements:
-      _method: POST
+cat_show:
+    path:     /categorie/{id}
+    defaults: { _controller: "MyJobeetBundle:Job:liste" }

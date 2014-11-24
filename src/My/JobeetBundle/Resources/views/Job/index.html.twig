@@ -1,52 +1,38 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <form id="form_recherche" action="{{ path('job_recherche') }}" method="post">
-        {{ form_widget(form) }}
-        <input type="submit" value="Rechercher" />
-    </form>
-    <div class="loading"></div>
-    <div id="resultats_recherche">
-        {% include 'MyJobeetBundle:Job:liste.html.twig' with {'jobs' : jobs} %}
-    </div>
-        <div id="jo">
+           <div id="categ">
             {% for category in categories %}
                 <div>
                     <div class="category">
-                        <h1>{{ category.name }}</h1>
+                        <a href="{{ path('cat_show', { 'id': category.id }) }}">
+                         <h1>{{ category.name }}</h1>
+                        </a>
                     </div>
-                    <table>
-                        {% for entity in category.tabjobs %}
-                            <a href="{{ path('job_show', { 'id': entity.id }) }}">
-                                {{ entity.location }}
-                            </a>
-                            {{ entity.position }}
-                            <td class="company">{{ entity.company }}</td>
 
-                        {% endfor %}
-                    </table>
+
                 </div>
             {% endfor %}
         </div>
 
-    <script>
-    $(".loading").hide();
-    $("#form_recherche").submit(function(){
-        $(".loading").show();
-        var motcle = $("#jobrecherche_motcle").val();
-        var DATA = 'motcle=' + motcle;
-        $.ajax({
-            type: "POST",
-            url: "{{ path('job_recherche')}}",
-            data: DATA,
-            cache: false,
-            success: function(data){
-                $('#resultats_recherche').html(data);
-                $(".loading").hide();
-            }
-        });
-        return false;
-    });
-    </script>
+    <div id="jobs">
+        {% for job in jobs %}
+            <div>
+                <div class="job">
+                    <a href="{{ path('job_show', { 'id': job.id }) }}">
+                        <h1>{{ job.url }}</h1>
+                    </a>
+                        {{ job.location }}
+                        {{ job.position }}
+                        {{ job.description }}
+
+                </div>
+
+
+            </div>
+        {% endfor %}
+    </div>
+
+
 
 {% endblock %}
