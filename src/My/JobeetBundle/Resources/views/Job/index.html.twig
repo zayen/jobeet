@@ -1,19 +1,20 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-           <div id="categ">
-            {% for category in categories %}
-                <div>
-                    <div class="category">
-                        <a href="{{ path('cat_show', { 'id': category.id }) }}">
-                         <h1>{{ category.name }}</h1>
-                        </a>
-                    </div>
-
-
+    <a href="{{ path('job') }}">
+        Back to the list
+    </a>
+    <div id="categ">
+        {% for category in categories %}
+            <div>
+                <div class="category">
+                    <a href="{{ path('cat_show', { 'id': category.id }) }}">
+                        <h1>{{ category.name }}</h1>
+                    </a>
                 </div>
-            {% endfor %}
-        </div>
+            </div>
+        {% endfor %}
+    </div>
 
     <div id="jobs">
         {% for job in jobs %}
@@ -22,9 +23,9 @@
                     <a href="{{ path('job_show', { 'id': job.id }) }}">
                         <h1>{{ job.url }}</h1>
                     </a>
-                        {{ job.location }}
-                        {{ job.position }}
-                        {{ job.description }}
+                    {{ job.location }}
+                    {{ job.position }}
+                    {{ job.description }}
 
                 </div>
 
@@ -32,7 +33,4 @@
             </div>
         {% endfor %}
     </div>
-
-
-
 {% endblock %}
