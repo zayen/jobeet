@@ -4,7 +4,8 @@ namespace My\JobeetBundle\Controller;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use My\JobeetBundle\Form\JobRechercheForm;
+use My\JobeetBundle\Form\PostuleForm;
+use Symfony\Component\HttpFoundation\Request;
 
 use My\JobeetBundle\Entity\Job;
 
@@ -25,12 +26,12 @@ class JobController extends Controller
 
         $categories = $em->getRepository('MyJobeetBundle:Category')->getAvecJobs();
 
-        if ($category !=null) {
+        if($category) {
 
             $jobs = $em->getRepository('MyJobeetBundle:Job')->getActiveJobs($category);
+        } else {
+            $jobs = $em->getRepository('MyJobeetBundle:Job')->getActiveJobs();
         }
-        else
-        {$jobs = $em->getRepository('MyJobeetBundle:Job')->getActiveJobs();}
 
 
         return $this->render('MyJobeetBundle:Job:index.html.twig', array(
@@ -82,5 +83,35 @@ class JobController extends Controller
             return $this->indexAction();
         }
 
+    }
+
+
+    /**
+     * Finds and displays a Job entity.
+     *
+     */
+    public function postuleAction($email,Request $request)
+    {
+
+        $form = $this->createForm(new PostuleForm());
+
+        $form->handleRequest($request);
+        if ($request->getMethod() == 'POST' and  $form->isValid())
+        {
+          // Bind value with form
+            $form->bindRequest($request);
+            $data = $form->getData();
+            $message = \Swift_Message::newInstance()
+                ->setContentType('text/html')
+                ->setSubject($data['subject'])
+                ->setFrom($data['email'])
+                ->setTo('$email')
+                ->setBody($data['content']);
+            $this->get('mailer')->send($message);
+        }
+        return $this->render('MyJobeetBundle:Job:postule.html.twig', array(
+            'form' => $form->createView(),
+            'email'=>$email
+        ));
     }
 }

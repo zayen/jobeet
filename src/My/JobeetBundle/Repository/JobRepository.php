@@ -33,7 +33,7 @@ class JobRepository extends EntityRepository
 
         if($category)
         {
-            $qb->andWhere('j.category = :category_id')
+            $qb->andWhere('j.category = :category')
                 ->setParameter('category', $category);
         }
 

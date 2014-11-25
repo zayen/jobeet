@@ -1,20 +1,25 @@
-<!DOCTYPE html-->
+<!DOCTYPE html>
 <html>
 <head>
-    <title>{% block title %}Bootstrap 101 Template{% endblock %}</title>
+    <title>JOBEET</title>
+    <!-- Include meta tag to ensure proper rendering and touch zooming -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Include bootstrap stylesheets -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style type="text/css">
-        .bs-example{
-            margin: 20px;
-        }
-    </style>
     {% block stylesheets %}
         {% stylesheets '@bootstrap_less' combine=true %}
         <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
+
+
+        <link rel="stylesheet" href="{{ asset('bundles/MyJobeetBundle/css/main.css') }}" type="text/
+css" media="all"/>
         {% endstylesheets %}
+
     {% endblock %}
     <script src="../../assets/js/html5shiv.js"></script>
     <script src="../../assets/js/respond.min.js"></script>
+
 </head>
 <body>
 {% block body %}
@@ -25,5 +30,13 @@
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}
+
+
+<br>
+<br>
+<hr>
+<footer>
+    <p>Ayaline &copy; 2014 and me.</p>
+</footer>
 </body>
 </html>
