@@ -8,6 +8,8 @@ use My\JobeetBundle\Form\PostuleForm;
 use Symfony\Component\HttpFoundation\Request;
 
 use My\JobeetBundle\Entity\Job;
+use My\JobeetBundle\Entity\Poste;
+use My\JobeetBundle\Entity\Document;
 
 /**
  * Job controller.
@@ -26,7 +28,7 @@ class JobController extends Controller
 
         $categories = $em->getRepository('MyJobeetBundle:Category')->getAvecJobs();
 
-        if($category) {
+        if ($category) {
 
             $jobs = $em->getRepository('MyJobeetBundle:Job')->getActiveJobs($category);
         } else {
@@ -90,29 +92,27 @@ class JobController extends Controller
      * Finds and displays a Job entity.
      *
      */
-    public function postuleAction($email,Request $request)
+    public function postuleAction(Request $request)
     {
+        $offre = new Poste();
+        $form = $this->createForm(new PostuleForm(), $offre);
 
-        $form = $this->createForm(new PostuleForm());
+        if ($this->getRequest()->isMethod('POST')) {
 
-        $form->handleRequest($request);
-        if ($request->getMethod() == 'POST'and $form->isValid())
-        {
-          // Bind value with form
-            $form->bindRequest($request);
-            $data = $form->getData();
-            $message = \Swift_Message::newInstance()
-                ->setContentType('text/html')
-                ->setSubject($data['subject'])
-                ->setFrom($data['email'])
-                ->setTo('$email')
-                ->setBody($data['content']);
-            $this->get('mailer')->send($message);
-            return $this->redirect($this->generateUrl('postule_success'));
+            $form->handleRequest($this->getRequest());
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+
+                $em->persist($offre);
+                $em->flush();
+
+                $this->redirect($this->generateUrl('postule_success'));
+            }
+
         }
         return $this->render('MyJobeetBundle:Job:postule.html.twig', array(
-            'form' => $form->createView(),
-            'email'=>$email
+            'form' => $form->createView()
+
         ));
     }
 }

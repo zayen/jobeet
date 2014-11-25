@@ -15,7 +15,11 @@ class PostuleForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('email','email',array('label' => 'Votre-email'));
-        $builder->add('cv','file',array('label' => 'Votre-CV'));
+        $builder->add('cv', 'entity', array(
+            'class' => 'MyJobeetBundle:Document',
+            'property' => 'cv',
+        ))  ->add('name')
+            ->add('file');
         $builder->add('lettreMotivation','textarea',array('label' => 'LettreMotivation'));
 
 
