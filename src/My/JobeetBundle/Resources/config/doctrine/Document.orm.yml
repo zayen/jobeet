@@ -1,6 +1,6 @@
 My\JobeetBundle\Entity\Document:
     type: entity
-    table: null
+    table: document
     repositoryClass: My\JobeetBundle\Repository\DocumentRepository
     id:
         id:
@@ -16,7 +16,10 @@ My\JobeetBundle\Entity\Document:
             type: string
             length: 255
     oneToMany:
-        jobs:
-            targetEntity: Job
-            mappedBy: category
-    lifecycleCallbacks: {  }
+        posts:
+            targetEntity: Poste
+            mappedBy: document
+    lifecycleCallbacks:
+      prePersist: [ preUpload,upload ]
+      preUpdate:  [ preUpload,upload ]
+      postRemove: [ removeUpload ]

@@ -14,6 +14,8 @@ class Document
      */
     private $id;
 
+    public $file;
+
     /**
      * @var string
      */
@@ -27,14 +29,14 @@ class Document
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $jobs;
+    private $posts;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->jobs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->posts = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -94,35 +96,87 @@ class Document
     }
 
     /**
-     * Add jobs
+     * Add posts
      *
-     * @param \My\JobeetBundle\Entity\Job $jobs
+     * @param \My\JobeetBundle\Entity\Poste $posts
      * @return Document
      */
-    public function addJob(\My\JobeetBundle\Entity\Job $jobs)
+    public function addPost(\My\JobeetBundle\Entity\Poste $posts)
     {
-        $this->jobs[] = $jobs;
+        $this->posts[] = $posts;
 
         return $this;
     }
 
     /**
-     * Remove jobs
+     * Remove posts
      *
-     * @param \My\JobeetBundle\Entity\Job $jobs
+     * @param \My\JobeetBundle\Entity\Poste $posts
      */
-    public function removeJob(\My\JobeetBundle\Entity\Job $jobs)
+    public function removePost(\My\JobeetBundle\Entity\Poste $posts)
     {
-        $this->jobs->removeElement($jobs);
+        $this->posts->removeElement($posts);
     }
 
     /**
-     * Get jobs
+     * Get posts
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getJobs()
+    public function getPosts()
     {
-        return $this->jobs;
+        return $this->posts;
+    }
+    public function getAbsolutePath()
+    {
+        return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->path;
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->path ? null : $this->getUploadDir().'/'.$this->path;
+    }
+
+    protected function getUploadRootDir()
+    {
+        // le chemin absolu du répertoire où les documents uploadés doivent être sauvegardés
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        // on se débarrasse de « __DIR__ » afin de ne pas avoir de problème lorsqu'on affiche
+        // le document/image dans la vue.
+        return 'uploads/documents';
+    }
+
+    public function preUpload()
+    {
+        if (null !== $this->file) {
+            // faites ce que vous voulez pour générer un nom unique
+            $this->path = sha1(uniqid(mt_rand(), true)).'.'.$this->file->guessExtension();
+        }
+    }
+
+    public function upload()
+    {
+        if (null === $this->file) {
+            return;
+        }
+
+        // s'il y a une erreur lors du déplacement du fichier, une exception
+        // va automatiquement être lancée par la méthode move(). Cela va empêcher
+        // proprement l'entité d'être persistée dans la base de données si
+        // erreur il y a
+        $this->file->move($this->getUploadRootDir(), $this->path);
+
+        unset($this->file);
+    }
+
+    public function removeUpload()
+    {
+        if ($file = $this->getAbsolutePath()) {
+            unlink($file);
+        }
     }
 }
