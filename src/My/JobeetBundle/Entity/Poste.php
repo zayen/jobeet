@@ -24,6 +24,11 @@ class Poste
      */
     private $lettreM;
 
+    /**
+     * @var \My\JobeetBundle\Entity\Document
+     */
+    private $document;
+
 
     /**
      * Get id
@@ -79,5 +84,28 @@ class Poste
     public function getLettreM()
     {
         return $this->lettreM;
+    }
+
+    /**
+     * Set document
+     *
+     * @param \My\JobeetBundle\Entity\Document $document
+     * @return Poste
+     */
+    public function setDocument(\My\JobeetBundle\Entity\Document $document = null)
+    {
+        $this->document = $document;
+
+        return $this;
+    }
+
+    /**
+     * Get document
+     *
+     * @return \My\JobeetBundle\Entity\Document 
+     */
+    public function getDocument()
+    {
+        return $this->document;
     }
 }

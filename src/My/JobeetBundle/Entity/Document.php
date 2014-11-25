@@ -24,6 +24,18 @@ class Document
      */
     private $path;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $jobs;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->jobs = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -79,5 +91,38 @@ class Document
     public function getPath()
     {
         return $this->path;
+    }
+
+    /**
+     * Add jobs
+     *
+     * @param \My\JobeetBundle\Entity\Job $jobs
+     * @return Document
+     */
+    public function addJob(\My\JobeetBundle\Entity\Job $jobs)
+    {
+        $this->jobs[] = $jobs;
+
+        return $this;
+    }
+
+    /**
+     * Remove jobs
+     *
+     * @param \My\JobeetBundle\Entity\Job $jobs
+     */
+    public function removeJob(\My\JobeetBundle\Entity\Job $jobs)
+    {
+        $this->jobs->removeElement($jobs);
+    }
+
+    /**
+     * Get jobs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getJobs()
+    {
+        return $this->jobs;
     }
 }

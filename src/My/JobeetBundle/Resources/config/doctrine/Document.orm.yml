@@ -15,4 +15,8 @@ My\JobeetBundle\Entity\Document:
         path:
             type: string
             length: 255
+    oneToMany:
+        jobs:
+            targetEntity: Job
+            mappedBy: category
     lifecycleCallbacks: {  }

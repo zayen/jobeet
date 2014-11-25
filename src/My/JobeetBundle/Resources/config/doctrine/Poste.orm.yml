@@ -1,6 +1,6 @@
 My\JobeetBundle\Entity\Poste:
     type: entity
-    table: null
+    table: poste
     repositoryClass: My\JobeetBundle\Repository\PosteRepository
     id:
         id:
@@ -14,4 +14,11 @@ My\JobeetBundle\Entity\Poste:
             length: 255
         lettreM:
             type: text
+    manyToOne:
+        document:
+          targetEntity: Document
+          inversedBy: posts
+          joinColumn:
+            name: document_id
+            referencedColumnName: id
     lifecycleCallbacks: {  }
