@@ -1,0 +1,18 @@
+My\JobeetBundle\Entity\Document:
+    type: entity
+    table: null
+    repositoryClass: My\JobeetBundle\Repository\DocumentRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        nom:
+            type: string
+            length: 255
+        path:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

@@ -17,7 +17,7 @@ class PostuleForm extends AbstractType
         $builder->add('email','email',array('label' => 'Votre-email'));
         $builder->add('cv','file',array('label' => 'Votre-CV'));
         $builder->add('lettreMotivation','textarea',array('label' => 'LettreMotivation'));
-        $builder->add('OK','submit',array('label' => 'OK'));
+
 
     }
 

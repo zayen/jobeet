@@ -96,7 +96,7 @@ class JobController extends Controller
         $form = $this->createForm(new PostuleForm());
 
         $form->handleRequest($request);
-        if ($request->getMethod() == 'POST' and  $form->isValid())
+        if ($request->getMethod() == 'POST'and $form->isValid())
         {
           // Bind value with form
             $form->bindRequest($request);
@@ -108,6 +108,7 @@ class JobController extends Controller
                 ->setTo('$email')
                 ->setBody($data['content']);
             $this->get('mailer')->send($message);
+            return $this->redirect($this->generateUrl('postule_success'));
         }
         return $this->render('MyJobeetBundle:Job:postule.html.twig', array(
             'form' => $form->createView(),
