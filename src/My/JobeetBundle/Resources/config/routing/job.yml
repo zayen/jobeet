@@ -4,10 +4,10 @@ job:
 job_show:
     path:     /{id}/show
     defaults: { _controller: "MyJobeetBundle:Job:show" }
-job_postule:
-    path:     /{email}/postule
-    defaults: { _controller: "MyJobeetBundle:Job:postule" }
-    requirements: { _method: post }
-postule_success:
+job_post:
+    path:     /post
+    defaults: { _controller: "MyJobeetBundle:Post:post" }
+
+post_success:
     path:     /success
     defaults: { _controller: "MyJobeetBundle:Job:sucess" }

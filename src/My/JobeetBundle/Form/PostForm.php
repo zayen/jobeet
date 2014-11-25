@@ -10,22 +10,16 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 
-class PostuleForm extends AbstractType
+class PostForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('email','email',array('label' => 'Votre-email'));
-        $builder->add('cv', 'entity', array(
-            'class' => 'MyJobeetBundle:Document',
-            'property' => 'cv',
-        ))  ->add('name')
-            ->add('file');
         $builder->add('lettreMotivation','textarea',array('label' => 'LettreMotivation'));
-
 
     }
 
 
     public function getName()
-      { return 'postule';}
+      { return 'post';}
 }

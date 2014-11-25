@@ -5,9 +5,9 @@ namespace My\JobeetBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Poste
+ * Post
  */
-class Poste
+class Post
 {
     /**
      * @var integer
@@ -24,11 +24,6 @@ class Poste
      */
     private $lettreM;
 
-    /**
-     * @var \My\JobeetBundle\Entity\Document
-     */
-    private $document;
-
 
     /**
      * Get id
@@ -44,7 +39,7 @@ class Poste
      * Set email
      *
      * @param string $email
-     * @return Poste
+     * @return Post
      */
     public function setEmail($email)
     {
@@ -67,7 +62,7 @@ class Poste
      * Set lettreM
      *
      * @param string $lettreM
-     * @return Poste
+     * @return Post
      */
     public function setLettreM($lettreM)
     {
@@ -84,28 +79,5 @@ class Poste
     public function getLettreM()
     {
         return $this->lettreM;
-    }
-
-    /**
-     * Set document
-     *
-     * @param \My\JobeetBundle\Entity\Document $document
-     * @return Poste
-     */
-    public function setDocument(\My\JobeetBundle\Entity\Document $document = null)
-    {
-        $this->document = $document;
-
-        return $this;
-    }
-
-    /**
-     * Get document
-     *
-     * @return \My\JobeetBundle\Entity\Document 
-     */
-    public function getDocument()
-    {
-        return $this->document;
     }
 }

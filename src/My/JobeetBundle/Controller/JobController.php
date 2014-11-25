@@ -88,31 +88,5 @@ class JobController extends Controller
     }
 
 
-    /**
-     * Finds and displays a Job entity.
-     *
-     */
-    public function postuleAction(Request $request)
-    {
-        $offre = new Poste();
-        $form = $this->createForm(new PostuleForm(), $offre);
 
-        if ($this->getRequest()->isMethod('POST')) {
-
-            $form->handleRequest($this->getRequest());
-            if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-
-                $em->persist($offre);
-                $em->flush();
-
-                $this->redirect($this->generateUrl('postule_success'));
-            }
-
-        }
-        return $this->render('MyJobeetBundle:Job:postule.html.twig', array(
-            'form' => $form->createView()
-
-        ));
-    }
 }

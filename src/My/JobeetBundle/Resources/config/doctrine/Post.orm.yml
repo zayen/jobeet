@@ -1,0 +1,18 @@
+My\JobeetBundle\Entity\Post:
+    type: entity
+    table: post
+    repositoryClass: My\JobeetBundle\Repository\PostRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        email:
+            type: string
+            length: 255
+        lettreM:
+            type: text
+
+    lifecycleCallbacks: {  }
