@@ -6,6 +6,12 @@ services:
         arguments:
             - ~
             - My\JobeetBundle\Entity\Job
-            - ~
+            - MyJobeetBundle:JobAdmin
         calls:
-            - [ setTranslationDomain, [JobeetBundle]]
+           - [ setTranslationDomain, [MyJobeetBundle]]
+
+    my_jobeet.admin.post:
+        class: My\JobeetBundle\Admin\PostAdmin
+        arguments: [~, My\JobeetBundle\Entity\Post, MyJobeetBundle:PostAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Post}
