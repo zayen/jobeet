@@ -9,16 +9,28 @@ My\JobeetBundle\Entity\Post:
             generator:
                 strategy: AUTO
     fields:
+
+        FirstName:
+            type: string
+            length: 255
+        LasttName:
+            type: string
+            length: 255
         email:
             type: string
             length: 255
-        lettreM:
-            type: text
 
     oneToOne:
-        image:
+        cv:
             targetEntity: Application\Sonata\MediaBundle\Entity\Media
+            cascade: ["persist", "merge"]
             joinColumn:
-                name: image_id
+                name: cv_id
                 referencedColumnName: id
+        LettreM:
+                    targetEntity: Application\Sonata\MediaBundle\Entity\Media
+                    cascade: ["persist", "merge"]
+                    joinColumn:
+                        name: Lettre_id
+                        referencedColumnName: id
     lifecycleCallbacks: {  }

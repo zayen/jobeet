@@ -15,10 +15,15 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('FirstName')
+            ->add('LasttName')
             ->add('email')
-            ->add('lettreM')
-            ->add('image', 'sonata_media_type', array(
-                'provider' => 'sonata.media.provider.image',
+            ->add('cv', 'sonata_media_type', array(
+                'provider' => 'sonata.media.provider.file',
+                'context' => 'default'
+            ))
+            ->add('LettreM', 'sonata_media_type', array(
+                'provider' => 'sonata.media.provider.file',
                 'context' => 'default'
             ));;
     }

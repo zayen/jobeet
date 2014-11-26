@@ -17,17 +17,27 @@ class Post
     /**
      * @var string
      */
-    private $email;
+    private $FirstName;
 
     /**
      * @var string
      */
-    private $lettreM;
+    private $LasttName;
+
+    /**
+     * @var string
+     */
+    private $email;
 
     /**
      * @var \Application\Sonata\MediaBundle\Entity\Media
      */
-    private $image;
+    private $cv;
+
+    /**
+     * @var \Application\Sonata\MediaBundle\Entity\Media
+     */
+    private $LettreM;
 
 
     /**
@@ -38,6 +48,52 @@ class Post
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set FirstName
+     *
+     * @param string $firstName
+     * @return Post
+     */
+    public function setFirstName($firstName)
+    {
+        $this->FirstName = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get FirstName
+     *
+     * @return string 
+     */
+    public function getFirstName()
+    {
+        return $this->FirstName;
+    }
+
+    /**
+     * Set LasttName
+     *
+     * @param string $lasttName
+     * @return Post
+     */
+    public function setLasttName($lasttName)
+    {
+        $this->LasttName = $lasttName;
+
+        return $this;
+    }
+
+    /**
+     * Get LasttName
+     *
+     * @return string 
+     */
+    public function getLasttName()
+    {
+        return $this->LasttName;
     }
 
     /**
@@ -64,48 +120,48 @@ class Post
     }
 
     /**
-     * Set lettreM
+     * Set cv
      *
-     * @param string $lettreM
+     * @param \Application\Sonata\MediaBundle\Entity\Media $cv
      * @return Post
      */
-    public function setLettreM($lettreM)
+    public function setCv(\Application\Sonata\MediaBundle\Entity\Media $cv = null)
     {
-        $this->lettreM = $lettreM;
+        $this->cv = $cv;
 
         return $this;
     }
 
     /**
-     * Get lettreM
-     *
-     * @return string 
-     */
-    public function getLettreM()
-    {
-        return $this->lettreM;
-    }
-
-    /**
-     * Set image
-     *
-     * @param \Application\Sonata\MediaBundle\Entity\Media $image
-     * @return Post
-     */
-    public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
+     * Get cv
      *
      * @return \Application\Sonata\MediaBundle\Entity\Media 
      */
-    public function getImage()
+    public function getCv()
     {
-        return $this->image;
+        return $this->cv;
+    }
+
+    /**
+     * Set LettreM
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $lettreM
+     * @return Post
+     */
+    public function setLettreM(\Application\Sonata\MediaBundle\Entity\Media $lettreM = null)
+    {
+        $this->LettreM = $lettreM;
+
+        return $this;
+    }
+
+    /**
+     * Get LettreM
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     */
+    public function getLettreM()
+    {
+        return $this->LettreM;
     }
 }
