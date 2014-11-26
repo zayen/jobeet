@@ -4,9 +4,9 @@
 
     <h3>Formulaire de Postulation</h3>
     <div class="well">
-        <form method="post" {{ form_enctype(form) }}>
+        <form method="post" {{ form_enctype(form) }} action=""{{ path('post_post') }}"">
             {{ form_widget(form) }}
-            <input type="submit" class="btn btn-primary" />
+            <input type="submit" class="btn btn-primary" value="Preview your job"/>
         </form>
     </div>
 

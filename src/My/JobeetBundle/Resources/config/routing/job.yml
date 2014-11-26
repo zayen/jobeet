@@ -10,5 +10,5 @@ post_post:
     defaults: { _controller: "MyJobeetBundle:Post:post" }
 
 post_success:
-    path:     /success
-    defaults: { _controller: "MyJobeetBundle:Post:sucess" }
+    path:     /post/success
+    defaults: { _controller: "MyJobeetBundle:Post:success" }
