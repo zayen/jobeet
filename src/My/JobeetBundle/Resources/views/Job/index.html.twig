@@ -45,10 +45,7 @@
                                     <td>{{ job.description }}</td>
                                     <td><a href="{{ path('job_show', { 'id': job.id }) }}"> show </a>
                                     </td>
-                                    <td>
-                                        <form action="{{ path('job_post') }}" method="post">
-                                            <button type="submit">Publish</button>
-                                        </form>
+                                    <td><a href="{{ url('post_post') }}"> Post</a>
                                     </td>
                                 </tr>
 
@@ -65,10 +62,4 @@
             </a>
         </p>
     </div>
-
-
-
-
-
-
 {% endblock %}

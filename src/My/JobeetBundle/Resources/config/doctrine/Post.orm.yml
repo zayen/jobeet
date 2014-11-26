@@ -15,4 +15,10 @@ My\JobeetBundle\Entity\Post:
         lettreM:
             type: text
 
+    ManyToOne:
+        media:
+            targetEntity: Application\Sonata\MediaBundle\Entity\Media
+            joinColumn:
+              name: image_id
+              referencedColumnName: id
     lifecycleCallbacks: {  }

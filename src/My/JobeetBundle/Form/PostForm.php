@@ -15,7 +15,7 @@ class PostForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('email','email',array('label' => 'Votre-email'));
-        $builder->add('lettreMotivation','textarea',array('label' => 'LettreMotivation'));
+        $builder->add('lettreM','textarea',array('label' => 'LettreMotivation'));
 
     }
 

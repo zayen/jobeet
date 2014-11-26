@@ -4,10 +4,11 @@ job:
 job_show:
     path:     /{id}/show
     defaults: { _controller: "MyJobeetBundle:Job:show" }
-job_post:
-    path:     /post
+
+post_post:
+    path:     /job/post
     defaults: { _controller: "MyJobeetBundle:Post:post" }
 
 post_success:
     path:     /success
-    defaults: { _controller: "MyJobeetBundle:Job:sucess" }
+    defaults: { _controller: "MyJobeetBundle:Post:sucess" }
