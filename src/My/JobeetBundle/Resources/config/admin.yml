@@ -1,17 +1,12 @@
 services:
-    sonata.admin.post:
-        class: My\JobeetBundle\Admin\JobAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Job" }
-        arguments:
-            - ~
-            - My\JobeetBundle\Entity\Job
-            - MyJobeetBundle:JobAdmin
-        calls:
-           - [ setTranslationDomain, [MyJobeetBundle]]
-
     my_jobeet.admin.post:
         class: My\JobeetBundle\Admin\PostAdmin
         arguments: [~, My\JobeetBundle\Entity\Post, MyJobeetBundle:PostAdmin]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin, label: Post}
+
+    my_jobeet.admin.job:
+        class: My\JobeetBundle\Admin\JobAdmin
+        arguments: [~, My\JobeetBundle\Entity\Job, MyJobeetBundle:JobAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Job}
