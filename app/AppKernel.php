@@ -31,9 +31,15 @@ class AppKernel extends Kernel
 
             // Then add SonataAdminBundle
             new Sonata\AdminBundle\SonataAdminBundle(),
-
-
             new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
+            new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
+
+
+
+
+            new My\UserBundle\MyUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

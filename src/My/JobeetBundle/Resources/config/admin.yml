@@ -10,3 +10,9 @@ services:
         arguments: [~, My\JobeetBundle\Entity\Job, MyJobeetBundle:JobAdmin]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin, label: Job}
+
+    my_jobeet.admin.category:
+        class: My\JobeetBundle\Admin\CategoryAdmin
+        arguments: [~, My\JobeetBundle\Entity\Category, MyJobeetBundle:CategoryAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Category}

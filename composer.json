@@ -29,7 +29,8 @@
         "sonata-project/cache-bundle": "dev-master",
         "twitter/bootstrap": "*",
         "jms/serializer-bundle": "0.13.*@dev",
-        "sonata-project/media-bundle": "~2.3"
+        "sonata-project/media-bundle": "~2.3",
+        "sonata-project/user-bundle": "~2.2"
     },
     "scripts": {
         "post-install-cmd": [

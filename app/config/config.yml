@@ -5,7 +5,7 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
+    translator:       ~
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -93,6 +93,9 @@ doctrine:
                     SonataMediaBundle: ~
                     ApplicationSonataMediaBundle: ~
                     MyJobeetBundle: ~
+                    MyUserBundle: ~
+
+
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -268,14 +271,26 @@ twig:
     form:
         resources:
             # other files
-            - 'SonataMediaBundle:Form:media_widgets.html.twig'
+
 sonata_block:
     default_contexts: [cms]
     blocks:
         # Enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
             contexts:   [admin]
+sonata_user:
+    security_acl: true
+    manager_type: orm # can be orm or mongodb
+
+
+
         # Your other blocks
-sonata_admin:
-    title:      My Jobeet Bundle
-    title_logo: bundles/myjobeet/imgages/job.png
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: My\UserBundle\Entity\User
+    group:
+        group_class:   Application\Sonata\UserBundle\Entity\Group
+        group_manager: sonata.user.orm.group_manager
+    service:
+        user_manager: sonata.user.orm.user_manager

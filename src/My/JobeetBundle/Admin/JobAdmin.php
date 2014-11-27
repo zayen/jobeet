@@ -44,9 +44,9 @@ class JobAdmin extends Admin
             ->add('location')
             ->add('description')
             ->add('email')
-            ->add('expires_at')
-            ->add('created_at')
-            ->add('updated_at')
+            ->add('expires_at','date',array('input' =>'datetime'))
+            ->add('created_at','date',array('input' =>'datetime'))
+            ->add('updated_at','date',array('input' =>'datetime'))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -71,9 +71,10 @@ class JobAdmin extends Admin
             ->add('location')
             ->add('description')
             ->add('email')
-            ->add('expires_at')
-            ->add('created_at')
-            ->add('updated_at')
+            ->add('expires_at','date',array('input' =>'datetime'))
+            ->add('created_at','date',array('input' =>'datetime'))
+            ->add('updated_at','date',array('input' =>'datetime'))
+
         ;
     }
 
@@ -91,9 +92,10 @@ class JobAdmin extends Admin
             ->add('location')
             ->add('description')
             ->add('email')
-            ->add('expires_at')
-            ->add('created_at')
-            ->add('updated_at')
+            ->add('expires_at','date',array('input' =>'datetime'))
+            ->add('created_at','date',array('input' =>'datetime'))
+            ->add('updated_at','date',array('input' =>'datetime'))
+
         ;
     }
 }
