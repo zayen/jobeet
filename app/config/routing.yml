@@ -1,7 +1,3 @@
-my_user:
-    resource: "@MyUserBundle/Resources/config/routing.yml"
-    prefix:   /
-
 my_jobeet:
     resource: "@MyJobeetBundle/Resources/config/routing.yml"
     prefix:   /

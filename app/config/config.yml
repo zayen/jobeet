@@ -93,8 +93,8 @@ doctrine:
                     SonataMediaBundle: ~
                     ApplicationSonataMediaBundle: ~
                     MyJobeetBundle: ~
-                    MyUserBundle: ~
-
+                    ApplicationSonataUserBundle: ~
+                    SonataUserBundle: ~
 
 
 # Swiftmailer Configuration
@@ -288,7 +288,7 @@ sonata_user:
 fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
-    user_class: My\UserBundle\Entity\User
+    user_class: Application\Sonata\UserBundle\Entity\User
     group:
         group_class:   Application\Sonata\UserBundle\Entity\Group
         group_manager: sonata.user.orm.group_manager
