@@ -39,6 +39,7 @@ My\JobeetBundle\Entity\Job:
   manyToOne:
     category:
       targetEntity: Category
+      cascade: ["persist", "merge"]
       inversedBy: jobs
       joinColumn:
         name: category_id

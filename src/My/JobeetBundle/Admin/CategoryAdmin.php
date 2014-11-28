@@ -47,6 +47,12 @@ class CategoryAdmin extends Admin
         $formMapper
             ->add('id')
             ->add('name')
+            ->add('jobs', null, array(), array(
+                'edit' => 'inline',
+                'inline' => 'table',
+                'sortable'  => 'position'
+            ))
+        ;
 
         ;
     }

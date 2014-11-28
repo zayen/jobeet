@@ -14,4 +14,5 @@ My\JobeetBundle\Entity\Category:
   oneToMany:
     jobs:
       targetEntity: Job
+      cascade: ["persist", "merge"]
       mappedBy: category

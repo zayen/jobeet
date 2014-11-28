@@ -98,6 +98,16 @@ class Category
         return $this->jobs;
     }
 
+    public function setJobs($jobs)
+    {
+        if (count(jobs) > 0) {
+            foreach (jobs as $i) {
+                $this->addJob($i);
+            }
+        }
+
+        return $this;
+    }
     public function __toString()
     {
         return $this->getName();

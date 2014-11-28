@@ -79,6 +79,15 @@ class Job
     {
         return $this->id;
     }
+    /**
+     * Set id
+     *
+     * @return integer
+     */
+    public function setId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set type

@@ -16,7 +16,7 @@ class JobAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('id')
+
             ->add('type')
             ->add('company')
             ->add('url')
@@ -25,8 +25,7 @@ class JobAdmin extends Admin
             ->add('description')
             ->add('email')
             ->add('expires_at')
-            ->add('created_at')
-            ->add('updated_at')
+
         ;
     }
 
@@ -36,17 +35,16 @@ class JobAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
+
             ->add('type')
+            ->add('category')
             ->add('company')
             ->add('url')
             ->add('position')
             ->add('location')
             ->add('description')
             ->add('email')
-            ->add('expires_at','date',array('input' =>'datetime'))
-            ->add('created_at','date',array('input' =>'datetime'))
-            ->add('updated_at','date',array('input' =>'datetime'))
+            ->add('expires_at')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -63,17 +61,18 @@ class JobAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('id')
+
             ->add('type')
+            ->add('category')
             ->add('company')
             ->add('url')
             ->add('position')
             ->add('location')
             ->add('description')
             ->add('email')
-            ->add('expires_at','date',array('input' =>'datetime'))
-            ->add('created_at','date',array('input' =>'datetime'))
-            ->add('updated_at','date',array('input' =>'datetime'))
+            ->add('expires_at')
+
+
 
         ;
     }
@@ -84,17 +83,17 @@ class JobAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('id')
+
             ->add('type')
+            ->add('category')
             ->add('company')
             ->add('url')
             ->add('position')
             ->add('location')
             ->add('description')
             ->add('email')
-            ->add('expires_at','date',array('input' =>'datetime'))
-            ->add('created_at','date',array('input' =>'datetime'))
-            ->add('updated_at','date',array('input' =>'datetime'))
+            ->add('expires_at')
+
 
         ;
     }
