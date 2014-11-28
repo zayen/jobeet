@@ -273,7 +273,7 @@ twig:
         resources:
             # other files
 sonata_user:
-    security_acl: false
+    security_acl: true
     manager_type: orm # can be orm or mongodb
     impersonating:
         route:                page_slug
@@ -324,14 +324,6 @@ sonata_user:
                 validation_groups:  [Profile]
 
 
-
-
-
-
-
-
-
-
 sonata_block:
     default_contexts: [cms]
     blocks:
@@ -355,12 +347,6 @@ fos_user:
     group:
         group_class:   Application\Sonata\UserBundle\Entity\Group
         group_manager: sonata.user.orm.group_manager
-    profile:
-            # Authentication Form
-        form:
-            type:               fos_user_profile
-            handler:            fos_user.profile.form.handler.default
-            name:               fos_user_profile_form
-            validation_groups:  [Authentication] # Please note : this is not the default value
+
     service:
         user_manager: sonata.user.orm.user_manager
