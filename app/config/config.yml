@@ -87,15 +87,16 @@ doctrine:
         # path:     "%database_path%"
 
     orm:
+
         entity_managers:
             default:
                 mappings:
                     SonataMediaBundle: ~
                     ApplicationSonataMediaBundle: ~
                     MyJobeetBundle: ~
-                    ApplicationSonataUserBundle: ~
+                    FOSUserBundle: ~
                     SonataUserBundle: ~
-
+                    ApplicationSonataUserBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -271,6 +272,12 @@ twig:
     form:
         resources:
             # other files
+sonata_user:
+    security_acl: true
+    manager_type: orm # can be orm or mongodb
+
+sonata_admin:
+    title: Jobeet Admin
 
 sonata_block:
     default_contexts: [cms]
@@ -278,13 +285,14 @@ sonata_block:
         # Enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
             contexts:   [admin]
-sonata_user:
-    security_acl: true
-    manager_type: orm # can be orm or mongodb
+        sonata.user.block.menu:    # used to display the menu in profile pages
+        sonata.user.block.account: # used to display menu option (login option)
 
-
-
-        # Your other blocks
+# override FOSUser default serialization
+jms_serializer:
+    metadata:
+        directories:
+            - { path: %kernel.root_dir%/../vendor/sonata-project/user-bundle/Sonata/UserBundle/Resources/config/serializer/FOSUserBundle, namespace_prefix: 'FOS\UserBundle' }        # Your other blocks
 fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main

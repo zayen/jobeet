@@ -10,63 +10,63 @@ security:
             ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
             SONATA:
                 - ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT
+
     providers:
         fos_userbundle:
-            id: fos_user.user_manager
-
+                 id: fos_user.user_manager
+        in_memory:
+            memory:
+                users:
+                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
 
     firewalls:
-        main:
-             pattern:             .*
-             context:             user
-             form_login:
-                  provider: fos_userbundle
-                  login_path:     /login
-                  use_forward:    false
-                  check_path:     /login_check
-                  failure_path:   null
-             logout:       true
-             anonymous:    true
+
         dev:
              pattern:  ^/(_(profiler|wdt)|css|images|js)/
              security: false
-        # -> custom firewall for the admin area of the URL
+# -> custom firewall for the admin area of the URL
         admin:
-              pattern:            /admin(.*)
-              context:            user
-              form_login:
-                  provider:       fos_userbundle
-                  login_path:     /admin/login
-                  use_forward:    false
-                  check_path:     /admin/login_check
-                  failure_path:   null
-              logout:
-                  path:           /admin/logout
-              anonymous:          true
-
-                # -> end custom configuration
+            pattern:            /admin(.*)
+            context:            user
+            form_login:
+                provider:       fos_userbundle
+                login_path:     /admin/login
+                use_forward:    false
+                check_path:     /admin/login_check
+                failure_path:   null
+            logout:
+                path:           /admin/logout
+            anonymous:          true
+        # -> end custom configuration
+        main:
+            pattern:             .*
+            context:             user
+            form_login:
+                provider:       fos_userbundle
+                login_path:     /login
+                use_forward:    false
+                check_path:     /login_check
+                failure_path:   null
+            logout:             true
+            anonymous:          true
         login:
              pattern:  ^/demo/secured/login$
              security: false
-
         secured_area:
              pattern:    ^/demo/secured/
              form_login:
-                  check_path: _security_check
-                  login_path: _demo_login
+                 check_path: _security_check
+                 login_path: _demo_login
              logout:
-                  path:   _demo_logout
-                  target: _demo
-                    #anonymous: ~
-                    #http_basic:
-                    #    realm: "Secured Demo Area"
-
+                 path:   _demo_logout
+                 target: _demo
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
          - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/admin/, role: ROLE_ADMIN }
+
  # Admin login page needs to be access without credential
          - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
