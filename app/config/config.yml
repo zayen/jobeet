@@ -2,6 +2,10 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: @MyJobeetBundle/Resources/config/admin.yml }
+    - { resource: sonata_news.yml }
+    - { resource: sonata_block.yml }
+    - { resource: sonata_media.yml }
+    - { resource: sonata_user.yml }
 
 framework:
     #esi:             ~
@@ -97,6 +101,8 @@ doctrine:
                     FOSUserBundle: ~
                     SonataUserBundle: ~
                     ApplicationSonataUserBundle: ~
+                    ApplicationSonataNewsBundle: ~
+                    SonataNewsBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -107,123 +113,6 @@ swiftmailer:
     spool:     { type: memory }
     encryption: ssl
 
-sonata_media:
-    db_driver: doctrine_orm
-    class:
-        media:              Application\Sonata\MediaBundle\Entity\Media
-        gallery:            Application\Sonata\MediaBundle\Entity\Gallery
-        gallery_has_media:  Application\Sonata\MediaBundle\Entity\GalleryHasMedia
-
-    default_context: default
-    contexts:
-        default:  # the default context is mandatory
-            download:
-                strategy: sonata.media.security.superadmin_strategy
-                mode: http
-            providers:
-                - sonata.media.provider.dailymotion
-                - sonata.media.provider.youtube
-                - sonata.media.provider.image
-                - sonata.media.provider.file
-
-            formats:
-                small: { width: 100 , quality: 70}
-                big:   { width: 500 , quality: 70}
-
-        tv:
-            download:
-                strategy: sonata.media.security.superadmin_strategy
-                mode: http
-            providers:
-                - sonata.media.provider.dailymotion
-                - sonata.media.provider.youtube
-
-
-            formats:
-                cinema:     { width: 1850 , quality: 768}
-                grandmatv:  { width: 640 , quality: 480}
-
-        news:
-            download:
-                strategy: sonata.media.security.superadmin_strategy
-                mode: http
-            providers:
-                - sonata.media.provider.dailymotion
-                - sonata.media.provider.youtube
-                - sonata.media.provider.image
-                - sonata.media.provider.file
-
-            formats:
-                small: { width: 150 , quality: 95}
-                big:   { width: 500 , quality: 90}
-
-    cdn:
-        server:
-            path:      /uploads/media # http://media.sonata-project.org
-
-        panther:
-            path:       http://domain.pantherportal.com/uploads/media
-            site_id:
-            password:
-            username:
-
-        fallback:
-            master:     sonata.media.cdn.panther
-            fallback:   sonata.media.cdn.server
-
-    filesystem:
-        local:
-            directory:  %kernel.root_dir%/../web/uploads/media
-            create:     false
-
-        ftp:
-            directory:
-            host:
-            username:
-            password:
-            port:     21
-            passive:  false
-            create:   false
-            mode:     2 # this is the FTP_BINARY constant. see: http://php.net/manual/en/ftp.constants.php
-
-        s3:
-            bucket:
-            accessKey:
-            secretKey:
-            create:         false
-            region:         s3.amazonaws.com # change if not using US Standard region
-            storage:        standard # can be one of: standard or reduced
-            acl:            public # can be one of: public, private, open, auth_read, owner_read, owner_full_control
-            encryption:     aes256 # can be aes256 or not set
-            cache_control:  max-age=86400 # or any other
-            meta:
-                key1:       value1 #any amount of metas(sent as x-amz-meta-key1 = value1)
-
-        mogilefs:
-            hosts:      []
-            domain:
-
-        replicate:
-            master: sonata.media.adapter.filesystem.s3
-            slave: sonata.media.adapter.filesystem.local
-
-        rackspace:
-           url:
-           secret:
-             username:
-             apiKey:
-           region:
-           containerName: media
-           create_container: false
-
-        openstack:
-           url:
-           secret:
-             username:
-             password:
-           region:
-           containerName: media
-           create_container: false
 
     providers:
         file:
@@ -272,69 +161,9 @@ twig:
     form:
         resources:
             # other files
-sonata_user:
-    security_acl: true
-    manager_type: orm # can be orm or mongodb
-    impersonating:
-        route:                page_slug
-        parameters:           { path: / }
-    class:                  # Entity Classes
-        user:               Application\Sonata\UserBundle\Entity\User
-        group:              Application\Sonata\UserBundle\Entity\Group
-    admin:                  # Admin Classes
-        user:
-            class:          Sonata\UserBundle\Admin\Entity\UserAdmin
-            controller:     SonataAdminBundle:CRUD
-            translation:    SonataUserBundle
-
-        group:
-            class:          Sonata\UserBundle\Admin\Entity\GroupAdmin
-            controller:     SonataAdminBundle:CRUD
-            translation:    SonataUserBundle
-    profile:
-            # Profile show page is a dashboard as in SonataAdminBundle
-            dashboard:
-                groups:
-                    id:
-                        label:                ~
-                        label_catalogue:      ~
-                        items:                []
-                        item_adds:            []
-                        roles:                []
-                blocks:
-
-                    - { position: left, type: sonata.block.service.text, settings: { content: "<h2>Welcome!</h2> This is a sample user profile dashboard, feel free to override it in the configuration! Want to make this text dynamic? For instance display the user's name? Create a dedicated block and edit the configuration!"} }
-
-            register:
-
-                confirm:
-                    redirect:
-                                    # Set it to false to disable redirection
-                        route: 'sonata_user_profile_show'
-                        route_parameters: ~
-
-            menu:
-                - { route: 'sonata_user_profile_edit', label: 'link_edit_profile', domain: 'SonataUserBundle'}
-                - { route: 'sonata_user_profile_edit_authentication', label: 'link_edit_authentication', domain: 'SonataUserBundle'}
-            # Profile Form (firstname, lastname, etc ...)
-            form:
-                type:               sonata_user_profile
-                handler:            sonata.user.profile.form.handler.default
-                name:               sonata_user_profile_form
-                validation_groups:  [Profile]
 
 
-sonata_block:
-    default_contexts: [cms]
-    blocks:
-        # Enable the SonataAdminBundle block
-        sonata.admin.block.admin_list:
-            contexts:   [admin]
-        sonata.user.block.menu:    # used to display the menu in profile pages
-        sonata.user.block.account: # used to display menu option (login option)
-        sonata.block.service.text:
-        sonata.block.service.css:
-        sonata.block.service.action:
+
 # override FOSUser default serialization
 jms_serializer:
     metadata:
