@@ -110,7 +110,7 @@ class Category
     }
     public function __toString()
     {
-        return $this->getName();
+        return "Category";
     }
 
     private $tab_jobs;

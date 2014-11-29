@@ -35,6 +35,7 @@
         "sonata-project/classification-bundle": "~2.2@dev",
         "sonata-project/datagrid-bundle": "2.2.*@dev",
         "knplabs/knp-menu-bundle": "~1.1",
+        "sonata-project/markitup-bundle": "2.1.*@dev",
         "sonata-project/seo-bundle": "~1.1"
     },
     "scripts": {

@@ -164,4 +164,9 @@ class Post
     {
         return $this->LettreM;
     }
+
+    public function __toString()
+    {
+        return "Post";
+    }
 }

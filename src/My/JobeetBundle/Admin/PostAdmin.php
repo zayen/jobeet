@@ -53,6 +53,8 @@ class PostAdmin extends Admin
             ->add('FirstName')
             ->add('LasttName')
             ->add('email')
+            ->add('cv')
+            ->add('LettreM')
         ;
     }
 

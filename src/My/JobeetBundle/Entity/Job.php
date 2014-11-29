@@ -359,4 +359,10 @@ class Job
     {
         $this->updated_at = new \DateTime();
     }
+
+    public function __toString()
+    {
+        return "Job";
+    }
+
 }

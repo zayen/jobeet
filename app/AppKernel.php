@@ -49,8 +49,34 @@ class AppKernel extends Kernel
             new Sonata\ClassificationBundle\SonataClassificationBundle(),
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
 
-             new Application\Sonata\NewsBundle\ApplicationSonataNewsBundle(),
-             new Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle()
+            new Application\Sonata\NewsBundle\ApplicationSonataNewsBundle(),
+            new Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new Sonata\MarkItUpBundle\SonataMarkItUpBundle()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         );
 
