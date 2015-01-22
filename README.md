@@ -1,171 +1,88 @@
-Symfony Standard Edition
-========================
+Sonata Standard Edition
+=======================
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony2
-application that you can use as the skeleton for your new applications.
+[ ![Codeship Status for sonata-project/sandbox](https://codeship.com/projects/abaa9ca0-5945-0132-9e3b-069770f0649f/status)](https://codeship.com/projects/50230)
 
-This document contains information on how to download, install, and start
-using Symfony. For a more detailed explanation, see the [Installation][1]
-chapter of the Symfony Documentation.
+What's inside?
+--------------
 
-1) Installing the Standard Edition
-----------------------------------
+Sonata Standard Edition comes pre-configured with the following bundles:
 
-When it comes to installing the Symfony Standard Edition, you have the
-following options.
+* Bundles from Symfony Standard distribution
+* Sonata Admin Bundles: Admin and Doctrine ORM Admin
+* Sonata Ecommerce Bundles: Payment, Customer, Invoice, Order and Product
+* Sonata Foundation Bundles: Core, Notification, Formatter, Intl, Cache, Seo and Easy Extends
+* Sonata Feature Bundles: Page, Media, News, User, Block, Timeline
+* Api Bundles: FOSRestBundle, BazingaHateoasBundle, NelmioApiDocBundle and JMSSerializerBundle
 
-### Use Composer (*recommended*)
+Installation
+------------
 
-As Symfony uses [Composer][2] to manage its dependencies, the recommended way
-to create a new project is to use it.
-
-If you don't have Composer yet, download it following the instructions on
-http://getcomposer.org/ or just run the following command:
+Get composer:
 
     curl -s http://getcomposer.org/installer | php
 
-Then, use the `create-project` command to generate a new Symfony application:
+Run the following command for the 2.3 branch:
 
-    php composer.phar create-project symfony/framework-standard-edition path/to/install
+    php composer.phar create-project sonata-project/sandbox:2.3.x-dev
 
-Composer will install Symfony and all its dependencies under the
-`path/to/install` directory.
+Or to get the 2.3 develop branch:
 
-### Download an Archive File
+    php composer.phar create-project sonata-project/sandbox:dev-2.3-develop
 
-To quickly test Symfony, you can also download an [archive][3] of the Standard
-Edition and unpack it somewhere under your web server root directory.
+The installation process used Incenteev's ParameterHandler to handle parameters.yml configuration. With the current
+installation, it is possible to use environment variables to configure this file:
 
-If you downloaded an archive "without vendors", you also need to install all
-the necessary dependencies. Download composer (see above) and run the
-following command:
+    DATABASE_NAME=sonata DATABASE_USER=root DATABASE_PASSWORD="" php composer.phar create-project sonata-project/sandbox:dev-2.3-develop
+    
+You might experience some timeout issues with composer, as the ``create-project`` start different scripts, you can increase the default composer value with the ``COMPOSER_PROCESS_TIMEOUT`` env variable:
 
-    php composer.phar install
+    COMPOSER_PROCESS_TIMEOUT=600 php composer.phar create-project sonata-project/sandbox:dev-2.3-develop
 
-2) Checking your System Configuration
--------------------------------------
+Reset the data
+--------------
 
-Before starting coding, make sure that your local system is properly
-configured for Symfony.
+Fixtures are automatically loaded on the ``composer create-project`` step. If you'd like to reset your sandbox to the default fixtures (or you had an issue while installing and want to fill in the fixtures manually), you may run:
 
-Execute the `check.php` script from the command line:
+    php bin/load_data.php
 
-    php app/check.php
+This will completely reset your database.
 
-The script returns a status code of `0` if all mandatory requirements are met,
-`1` otherwise.
+Run
+---
 
-Access the `config.php` script from a browser:
+If you are running PHP5.4, you can use the built in server to start the demo:
 
-    http://localhost/path/to/symfony/app/web/config.php
+    app/console server:run localhost:9090
 
-If you get any warnings or recommendations, fix them before moving on.
+Now open your browser and go to http://localhost:9090/
 
-3) Browsing the Demo Application
---------------------------------
+Tests
+-----
 
-Congratulations! You're now ready to use Symfony.
+### Functional testing
 
-From the `config.php` page, click the "Bypass configuration and go to the
-Welcome page" link to load up your first Symfony page.
+To run the Behat tests, copy the default configuration file and adjust the base_url to your needs
 
-You can also use a web-based configurator by clicking on the "Configure your
-Symfony Application online" link of the `config.php` page.
+    # behat.yml
+    imports:
+        - behat.yml.dist
 
-To see a real-live Symfony page in action, access the following page:
+    # Overwrite only the config you want to change here
 
-    web/app_dev.php/demo/hello/Fabien
+You can now run the tests suite using the following command
 
-4) Getting started with Symfony
--------------------------------
+    bin/qa_behat.sh
 
-This distribution is meant to be the starting point for your Symfony
-applications, but it also contains some sample code that you can learn from
-and play with.
+To get more informations about Behat, feel free to check [the official documentation][link_behat].
 
-A great way to start learning Symfony is via the [Quick Tour][4], which will
-take you through all the basic features of Symfony2.
 
-Once you're feeling good, you can move onto reading the official
-[Symfony2 book][5].
+### Unit testing
 
-A default bundle, `AcmeDemoBundle`, shows you Symfony2 in action. After
-playing with it, you can remove it by following these steps:
+To run the Sonata test suites, you can run the command:
 
-  * delete the `src/Acme` directory;
-
-  * remove the routing entry referencing AcmeDemoBundle in `app/config/routing_dev.yml`;
-
-  * remove the AcmeDemoBundle from the registered bundles in `app/AppKernel.php`;
-
-  * remove the `web/bundles/acmedemo` directory;
-
-  * remove the `security.providers`, `security.firewalls.login` and
-    `security.firewalls.secured_area` entries in the `security.yml` file or
-    tweak the security configuration to fit your needs.
-
-What's inside?
----------------
-
-The Symfony Standard Edition is configured with the following defaults:
-
-  * Twig is the only configured template engine;
-
-  * Doctrine ORM/DBAL is configured;
-
-  * Swiftmailer is configured;
-
-  * Annotations for everything are enabled.
-
-It comes pre-configured with the following bundles:
-
-  * **FrameworkBundle** - The core Symfony framework bundle
-
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
-
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
-
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
-
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
-
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
-
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
-
-  * [**AsseticBundle**][12] - Adds support for Assetic, an asset processing
-    library
-
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
-
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
-
-  * [**SensioGeneratorBundle**][13] (in dev/test env) - Adds code generation
-    capabilities
-
-  * **AcmeDemoBundle** (in dev/test env) - A demo bundle with some example
-    code
-
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
+    bin/qa_client_ci.sh
 
 Enjoy!
 
-[1]:  http://symfony.com/doc/2.4/book/installation.html
-[2]:  http://getcomposer.org/
-[3]:  http://symfony.com/download
-[4]:  http://symfony.com/doc/2.4/quick_tour/the_big_picture.html
-[5]:  http://symfony.com/doc/2.4/index.html
-[6]:  http://symfony.com/doc/2.4/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  http://symfony.com/doc/2.4/book/doctrine.html
-[8]:  http://symfony.com/doc/2.4/book/templating.html
-[9]:  http://symfony.com/doc/2.4/book/security.html
-[10]: http://symfony.com/doc/2.4/cookbook/email.html
-[11]: http://symfony.com/doc/2.4/cookbook/logging/monolog.html
-[12]: http://symfony.com/doc/2.4/cookbook/assetic/asset_management.html
-[13]: http://symfony.com/doc/2.4/bundles/SensioGeneratorBundle/index.html
+[link_behat]: http://docs.behat.org "the official Behat documentation"

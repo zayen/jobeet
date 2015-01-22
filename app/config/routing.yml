@@ -1,38 +1,24 @@
-my_jobeet:
-    resource: "@MyJobeetBundle/Resources/config/routing.yml"
-    prefix:   /
 
-admin:
-    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
-    prefix: /admin
+# Internal routing configuration to handle ESI
+#_internal:
+#   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+#   prefix:   /_internal
+#
+# Support for LiipImagineBundle
+#_imagine:
+#    resource: .
+#    type:     imagine
 
-_sonata_admin:
-    resource: .
-    type: sonata_admin
-    prefix: /admin
+_front:
+    resource: routing_front.yml
 
-sonata_user:
-    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
-    prefix: /admin
+_admin:
+    resource: routing_admin.yml
+    prefix:   /admin
 
-sonata_user_security:
-    resource: "@SonataUserBundle/Resources/config/routing/sonata_security_1.xml"
+_api:
+    resource: routing_api.yml
+    prefix:   /api
 
-sonata_user_resetting:
-    resource: "@SonataUserBundle/Resources/config/routing/sonata_resetting_1.xml"
-    prefix: /resetting
 
-sonata_user_profile:
-    resource: "@SonataUserBundle/Resources/config/routing/sonata_profile_1.xml"
-    prefix: /profile
 
-sonata_user_register:
-    resource: "@SonataUserBundle/Resources/config/routing/sonata_registration_1.xml"
-    prefix: /register
-
-sonata_user_change_password:
-    resource: "@SonataUserBundle/Resources/config/routing/sonata_change_password_1.xml"
-    prefix: /profile
-news:
-    resource: '@SonataNewsBundle/Resources/config/routing/news.xml'
-    prefix: /news

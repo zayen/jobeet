@@ -1,42 +1,14 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>JOBEET</title>
-    <!-- Include meta tag to ensure proper rendering and touch zooming -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Include bootstrap stylesheets -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block stylesheets %}
-        {% stylesheets '@bootstrap_less' combine=true %}
-        <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
-
-
-        <link rel="stylesheet" href="{{ asset('bundles/MyJobeetBundle/css/main.css') }}" type="text/
-css" media="all"/>
-        {% endstylesheets %}
-
-    {% endblock %}
-    <script src="../../assets/js/html5shiv.js"></script>
-    <script src="../../assets/js/respond.min.js"></script>
-
-</head>
-<body>
-{% block body %}
-{% endblock %}
-
-{% block javascripts %}
-    {% javascripts '@jquery_js' '@bootstrap_js' filter='?yui_js' combine=true %}
-    <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-{% endblock %}
-
-
-<br>
-<br>
-<hr>
-<footer>
-    <p>Ayaline &copy; 2014 and me.</p>
-</footer>
-</body>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% block content %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
 </html>

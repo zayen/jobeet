@@ -1,142 +1,144 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: sonata_media.yml }
-    - { resource: sonata_block.yml }
-    - { resource: sonata_formatter.yml }
-    - { resource: sonata_news.yml }
-    - { resource: sonata_user.yml }
-    - { resource: @MyJobeetBundle/Resources/config/admin.yml }
+    - { resource: assetic.yml }
+
+    # Mopa Bootstrap
+    - { resource: mopa/mopa_bootstrap.yml }
+
+    # Knp Paginator
+   # - { resource: knp/knp_paginator.yml }
+
+    # FriendOfSymfony Bundles
+    - { resource: fos/fos_comment.yml }
+    - { resource: fos/fos_rest.yml }
+    - { resource: fos/fos_user.yml }
+    #- { resource: fos/fos_elastica.yml }
+
+    #- { resource: bazinga/bazinga_hateos.yml }
+
+    # Sonata Core Bundles
+    - { resource: sonata/sonata_block.yml }
+    - { resource: sonata/sonata_formatter.yml }
+    - { resource: sonata/sonata_cache.yml }
+    - { resource: sonata/sonata_seo.yml }
+    - { resource: sonata/sonata_timeline.yml }
+    - { resource: sonata/sonata_intl.yml }
+    - { resource: sonata/sonata_core.yml }
+
+    # Sonata Feature Bundles
+    - { resource: sonata/sonata_admin.yml }
+    - { resource: sonata/sonata_comment.yml }
+    - { resource: sonata/sonata_page.yml }
+    - { resource: sonata/sonata_media.yml }
+    - { resource: sonata/sonata_news.yml }
+    - { resource: sonata/sonata_user.yml }
+    - { resource: sonata/sonata_notification.yml }
+
+    # Sonata e-commerce bundles
+
 
 framework:
-    #esi:             ~
-    translator:       ~
-    secret:          "%secret%"
+    #esi:                   ~
+    translator:
+        fallback:           en
+    secret:                 %secret%
     router:
-        resource: "%kernel.root_dir%/config/routing.yml"
+        resource:           "%kernel.root_dir%/config/routing.yml"
         strict_requirements: ~
-    form:            ~
-    csrf_protection: ~
-    validation:      { enable_annotations: true }
+    form:                    true
+    csrf_protection:         true
+    validation:
+        enable_annotations:  true
     templating:
-        engines: ['twig']
-        #assets_version: SomeVersionScheme
-    default_locale:  "%locale%"
-    trusted_hosts:   ~
-    trusted_proxies: ~
+        engines:             ['twig']
+        #assets_version:      SomeVersionScheme
+
+    default_locale:          %locale%
     session:
-        # handler_id set to null will use default session handler from php.ini
-        handler_id:  ~
-    fragments:       ~
-    http_method_override: true
+        save_path:           %kernel.root_dir%/cache/sessions
+
+    fragments:               ~
+    trusted_proxies:         ~
+    http_method_override:    true
 
 # Twig Configuration
-twig:
-    debug:            "%kernel.debug%"
-    strict_variables: "%kernel.debug%"
-
-# Assetic Configuration
-assetic:
-    debug:          %kernel.debug%
-    use_controller: false
-    bundles:        [ ]
-    java: /usr/bin/java
-    filters:
-        cssrewrite: ~
-        cssembed:
-          jar: %kernel.root_dir%/Resources/java/cssembed-0.4.5.jar
-        yui_js:
-          jar: %kernel.root_dir%/Resources/java/yuicompressor.jar
-        lessphp:
-          file: %kernel.root_dir%/../vendor/leafo/lessphp/lessc.inc.php
-          apply_to: "\.less$"
-    assets:
-        jquery_js:
-            inputs:
-                - '%kernel.root_dir%/../components/jquery/jquery.min.js'
-            filters: [?yui_js]
-        bootstrap_js:
-            inputs:
-                - '%kernel.root_dir%/../vendor/twitter/bootstrap/js/transition.js'
-                - '%kernel.root_dir%/../vendor/twitter/bootstrap/js/alert.js'
-                - '%kernel.root_dir%/../vendor/twitter/bootstrap/js/modal.js'
-                - '%kernel.root_dir%/../vendor/twitter/bootstrap/js/dropdown.js'
-                - '%kernel.root_dir%/../vendor/twitter/bootstrap/js/scrollspy.js'
-                - '%kernel.root_dir%/../vendor/twitter/bootstrap/js/tab.js'
-                - '%kernel.root_dir%/../vendor/twitter/bootstrap/js/tooltip.js'
-                - '%kernel.root_dir%/../vendor/twitter/bootstrap/js/popover.js'
-                - '%kernel.root_dir%/../vendor/twitter/bootstrap/js/button.js'
-                - '%kernel.root_dir%/../vendor/twitter/bootstrap/js/collapse.js'
-                - '%kernel.root_dir%/../vendor/twitter/bootstrap/js/carousel.js'
-                - '%kernel.root_dir%/../vendor/twitter/bootstrap/js/affix.js'
-            filters: [?yui_js]
-        bootstrap_less:
-            inputs:
-                - '%kernel.root_dir%/../vendor/twitter/bootstrap/less/bootstrap.less'
-            filters: [lessphp,cssembed]
-
-# Doctrine Configuration
-doctrine:
-    dbal:
-        types:
-            json: Sonata\Doctrine\Types\JsonType
-        driver:   "%database_driver%"
-        host:     "%database_host%"
-        port:     "%database_port%"
-        dbname:   "%database_name%"
-        user:     "%database_user%"
-        password: "%database_password%"
-        charset:  UTF8
-        # if using pdo_sqlite as your database driver, add the path in parameters.yml
-        # e.g. database_path: "%kernel.root_dir%/data/data.db3"
-        # path:     "%database_path%"
-
-    orm:
-
-        entity_managers:
-            default:
-                mappings:
-                    SonataMediaBundle: ~
-                    ApplicationSonataMediaBundle: ~
-                    MyJobeetBundle: ~
-                    FOSUserBundle: ~
-                    SonataUserBundle: ~
-                    ApplicationSonataUserBundle: ~
-                    ApplicationSonataNewsBundle: ~
-                    SonataNewsBundle: ~
-                    ApplicationSonataClassificationBundle: ~
-                    SonataClassificationBundle: ~
-
-# Swiftmailer Configuration
-swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }
-    encryption: ssl
-
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
 
+    base_template_class: Sonata\CacheBundle\Twig\TwigTemplate14
+
     form:
         resources:
-            # other files
+            - 'SonataFormatterBundle:Form:formatter.html.twig'
+            - 'SonataMediaBundle:Form:media_widgets.html.twig'
+            - 'SonataCoreBundle:Form:datepicker.html.twig'
 
+    exception_controller: 'FOS\RestBundle\Controller\ExceptionController::showAction'
 
+# Doctrine Configuration
+doctrine:
+    dbal:
+        default_connection: default
+
+        connections:
+            default:
+                driver:   %database_driver%
+                dbname:   %database_name%
+                user:     %database_user%
+                host:     %database_host%
+                password: %database_password%
+                charset:  UTF8
+
+        types:
+            json:     Sonata\Doctrine\Types\JsonType
+
+    orm:
+        auto_generate_proxy_classes: %kernel.debug%
+        default_entity_manager: default
+
+        entity_managers:
+            default:
+                auto_mapping: true
+                mappings: ~
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: %mailer_transport%
+    host:      %mailer_host%
+    username:  %mailer_user%
+    password:  %mailer_password%
+
+jms_security_extra:
+    secure_all_services: false
 
 jms_serializer:
     metadata:
         directories:
-            - { path: %kernel.root_dir%/../vendor/sonata-project/user-bundle/Sonata/UserBundle/Resources/config/serializer/FOSUserBundle, namespace_prefix: 'FOS\UserBundle' }        # Your other blocks
-fos_user:
-    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
-    firewall_name: main
-    user_class: Application\Sonata\UserBundle\Entity\User
-    group:
-        group_class:   Application\Sonata\UserBundle\Entity\Group
-        group_manager: sonata.user.orm.group_manager
+            - { path: %kernel.root_dir%/../vendor/sonata-project/user-bundle/Resources/config/serializer/FOSUserBundle, namespace_prefix: 'FOS\UserBundle' }
+            - { path: %kernel.root_dir%/../vendor/sonata-project/datagrid-bundle/Resources/config/serializer, namespace_prefix: 'Sonata\DatagridBundle' }
 
-    service:
-        user_manager: sonata.user.orm.user_manager
+# Assetic Configuration
+#assetic:
+#    debug:          %kernel.debug%
+#    use_controller: false
+#    filters:
+#        cssrewrite: ~
+#        # closure:
+#        #     jar: %kernel.root_dir%/java/compiler.jar
+#        # yui_css:
+#        #     jar: %kernel.root_dir%/java/yuicompressor-2.4.2.jar
+#
+#        # Comment out those lines if you wish to use the less version of bootstrap
+#        less:
+#            node: /usr/local/bin/node
+#            node_paths: [/usr/local/node/node-v0.10.22/lib/node_modules]
+#            apply_to: "\.less$"
+
+nelmio_api_doc: ~
+
+sensio_framework_extra:
+    view:    { annotations: false }
+    router:  { annotations: true }
+    request: { converters:  true }
